@@ -6,9 +6,10 @@
     <div v-else-if="email.length < 15">Twój adres e-mail jest w sam raz.</div>
     <div v-else>Twój adres e-mail jest stanowczo za d³ugi.</div>-->
     <div v-if="!authenticatedUserName">
-      <login-form @login="logMeIn($event)" button-label="WejdŸ"></login-form>
-      <login-form @login="logMeIn($event)" button-label="Wleæ"></login-form>
+      <login-form @login="logMeIn($event)"button-label="Wejdz"></login-form>
+      <!---<login-form @login="logMeIn($event)" button-label="Wleæ"></login-form>
       <login-form @login="logMeIn($event)" :button-label="Math.random() < 0.5 ? 'Etykieta A' : 'Etykieta B'"></login-form>
+      -->
     </div>
     <div v-else>
       <h3>Witaj {{authenticatedUserName}}!</h3>
