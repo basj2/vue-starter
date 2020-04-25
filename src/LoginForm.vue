@@ -2,12 +2,13 @@
    <div>
        <label>Zaloguj się e-mailem</label>
        <input type="email" v-model="email">
-       <button @click="enter()">Wchodzę</button>
+       <button @click="enter()">{{buttonLabel}}</button>
    </div>
 </template>
 
 <script>
 export default {
+ props: ['buttonLabel'],
  data() {
      return {
          email: ''
