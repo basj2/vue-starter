@@ -6,6 +6,7 @@
     </div>
     <div v-else>
       <logged-in-user :username="authenticatedUsername" @logout="logMeOut()"></logged-in-user>
+      <meeting-page></meeting-page>
     </div>
   </div>
 </template>
@@ -14,8 +15,9 @@
 import "milligram";
 import LoginForm from "./LoginForm";
 import LoggedInUser from "./LoggedInUser";
+import MeetingPage from "./meetings/MeetingPage";
 export default {
-  components: { LoginForm, LoggedInUser },
+  components: { LoginForm, LoggedInUser, MeetingPage },
   
   data() {
     return {
