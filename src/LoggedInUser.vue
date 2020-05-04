@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h3>Witaj {{username}}!</h3>
-    <a @click="$emit('logout')">Wyloguj</a>
+    <h3>Witaj {{username}}!<button @click="$emit('logout')" style="float: right;">Wyloguj</button></h3>
+    
   </div>
 </template>
 
