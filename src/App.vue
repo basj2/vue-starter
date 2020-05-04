@@ -1,19 +1,11 @@
 <template>
   <div id="app">
-    <h1>Witaj w systemie do zapisów na zajêcia</h1>
-
-    <!---<div v-if="email.length < 10">Ale masz krótki adres!</div>
-    <div v-else-if="email.length < 15">Twój adres e-mail jest w sam raz.</div>
-    <div v-else>Twój adres e-mail jest stanowczo za d³ugi.</div>-->
-    <div v-if="!authenticatedUserName">
-      <login-form @login="logMeIn($event)"button-label="Wejdz"></login-form>
-      <!---<login-form @login="logMeIn($event)" button-label="Wleæ"></login-form>
-      <login-form @login="logMeIn($event)" :button-label="Math.random() < 0.5 ? 'Etykieta A' : 'Etykieta B'"></login-form>
-      -->
+    <h1>Witaj w systemie do zapisÃ³w na zajÄ™cia</h1>
+    <div v-if="!authenticatedUsername">
+      <login-form @login="logMeIn($event)"></login-form>
     </div>
     <div v-else>
-      <h3>Witaj {{authenticatedUserName}}!</h3>
-      <a @click="logMeOut()">Wyloguj</a>
+      <logged-in-user :username="authenticatedUsername" @logout="logMeOut()"></logged-in-user>
     </div>
   </div>
 </template>
@@ -21,23 +13,21 @@
 <script>
 import "milligram";
 import LoginForm from "./LoginForm";
+import LoggedInUser from "./LoggedInUser";
 export default {
-  components: {LoginForm},
+  components: { LoginForm, LoggedInUser },
+  
   data() {
     return {
-      authenticatedUserName: ""
+      authenticatedUsername: ""
     };
   },
   methods: {
-    alertMyEmail() {
-      alert(this.email);
-    },
     logMeIn(username) {
-      this.authenticatedUserName = username;
-      this.email = "";
+      this.authenticatedUsername = username;
     },
     logMeOut() {
-      this.authenticatedUserName = "";
+      this.authenticatedUsername = "";
     }
   }
 };

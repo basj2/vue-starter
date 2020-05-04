@@ -7,7 +7,9 @@
 </template>
 
 <script>
+
 export default {
+
  props: ['buttonLabel'],
  data() {
      return {
@@ -17,6 +19,7 @@ export default {
  methods: {
      enter() {
          this.$emit('login', this.email);
+         
      }
  },
  computed: {
