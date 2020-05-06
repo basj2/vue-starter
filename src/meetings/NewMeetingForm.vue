@@ -1,28 +1,34 @@
 <template>
-    <form @submit.prevent="addNewMeeting()">
-            <h3>Dodaj nowe spotkanie</h3>
-            <label>Nazwa</label>
-            <input type="text" v-model="newMeeting.name">
-            <label>Opis</label>
-            <textarea v-model="newMeeting.description"></textarea>
-            <button>Dodaj</button>
-        </form>
+  <form @submit.prevent="addNewMeeting()">
+    <h3>Dodaj nowe spotkanie</h3>
+    <label>Nazwa</label>
+    <input type="text" v-model="newMeeting.name" />
+    <label>Opis</label>
+    <textarea v-model="newMeeting.description"></textarea>
+    <button>Dodaj</button>
+  </form>
 </template>
 
 <script>
 export default {
   data() {
-      return {
-          newMeeting: {}
-      };
+    return {
+      newMeeting: {}
+    };
   },
   methods: {
-      addNewMeeting() {
-        this.$emit('added', this.newMeeting);
-        this.newMeeting = {};
-    }
+    addNewMeeting() {
+	  this.newMeeting.participants = [];
+	  this.$emit("added", this.newMeeting);
+	  //this.newMeeting.participants.push({name: 'test'});
+	  this.newMeeting = {};
+	  
+	},
+	
+
+	
   }
-}
+};
 </script>
 
 <style>

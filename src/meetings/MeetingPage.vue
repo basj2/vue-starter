@@ -10,17 +10,18 @@
     </div>
 
     <div v-else>
-      <h2>Dodaj nowe spotkanie</h2>
-      <new-meeting-form @added="addNewMeeting($event)"></new-meeting-form>
+      <new-meeting-form :participant="username" @added="addNewMeeting($event)"></new-meeting-form>
     </div>
 
     <div v-if="meetings.length == 0">
       <h5>Brak zaplanowanych spotkań.</h5>
     </div>
-    <div v-else>
+    <div v-if="meetings.length > 0 ">
       <h5>Zaplanowane spotkania ({{meetings.length}})</h5>
-      <meetings-list :meetings="meetings"></meetings-list>
+      <meetings-list 
+	  :meetings="meetings" @userAdded="addUser($event)"></meetings-list>
     </div>
+    <h5>{{test}}</h5>
   </div>
 </template>
 
@@ -30,19 +31,29 @@ import MeetingsList from "./MeetingsList";
 
 export default {
   components: { NewMeetingForm, MeetingsList },
+  props: ["username"],
   data() {
     return {
       meetings: [],
-      newMeetingForm: false
+      newMeetingForm: false,
+	  test: "",
+	 
     };
   },
   methods: {
     addNewMeeting(meeting) {
       this.meetings.push(meeting);
       this.newMeetingForm = false;
+      //this.meetingId = this.meetings.indexOf(meeting);
     },
     openMeetingForm() {
       this.newMeetingForm = true;
+    },
+    addUser(meeting) {
+      //this.test = "a";
+      meeting.participants.push({ name: this.username });
+	  this.test = meeting;
+	 
     }
   }
 };
