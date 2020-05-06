@@ -7,7 +7,7 @@
     <div v-show="authenticatedUsername">
       <logged-in-user :username="authenticatedUsername" @logout="logMeOut()"></logged-in-user>
 
-      <meeting-page :username="authenticatedUsername"></meeting-page>
+      <meeting-page :loggedOut="loggedOut" :username="authenticatedUsername"></meeting-page>
     </div>
   </div>
 </template>
@@ -23,7 +23,8 @@ export default {
 
   data() {
     return {
-      authenticatedUsername: ""
+      authenticatedUsername: "",
+      loggedOut: false
     };
   },
   methods: {
@@ -32,6 +33,7 @@ export default {
     },
     logMeOut() {
       this.authenticatedUsername = "";
+      this.loggedOut = true;
     }
   }
 };

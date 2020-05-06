@@ -18,7 +18,7 @@
     </div>
     <div v-if="meetings.length > 0 ">
       <h5>Zaplanowane spotkania ({{meetings.length}})</h5>
-      <meetings-list :meetings="meetings" @userAdded="addUser($event)"></meetings-list>
+      <meetings-list :username="username":meetings="meetings"></meetings-list>
 	  <!--<h5  style="color:red">{{message}}</h5>-->
     </div>
 	
@@ -29,7 +29,6 @@
 <script>
 import NewMeetingForm from "./NewMeetingForm";
 import MeetingsList from "./MeetingsList";
-
 export default {
   components: { NewMeetingForm, MeetingsList },
   props: ["username"],
@@ -38,35 +37,18 @@ export default {
       meetings: [],
       newMeetingForm: false,
       test: "",
-      message: ""
+	  isAdded: false
     };
   },
   methods: {
     addNewMeeting(meeting) {
       this.meetings.push(meeting);
       this.newMeetingForm = false;
-
     },
     openMeetingForm() {
       this.newMeetingForm = true;
     },
-    addUser(meeting) {
-      var isAdded = false;
-      var i;
-      for (i = 0; i < meeting.participants.length; i++) {
-        if (meeting.participants[i].name == this.username) {
-          isAdded = true;
-        }
-      }
-      if (!isAdded) {
-		meeting.participants.push({ name: this.username });
-		//this.message = ""
-	  } 
-	  if (isAdded) {
-		  //this.message = "Zostałeś już zapisany."
-	  }
-      
-    }
+    
   },
   computed:{
 	 

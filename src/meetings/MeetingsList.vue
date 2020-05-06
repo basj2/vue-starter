@@ -14,8 +14,12 @@
         <td>
           <meeting-participants :counter="counter" :participants="meeting.participants"></meeting-participants>
         </td>
-        <button style="float: right;margin:5px;">Usuń puste spotkanie</button>
-        <button @click="addUser(meeting)" style="float: right;margin:5px;">Zapisz się</button>
+        <button v-if="meeting.participants.length == 0" style="float: right;margin:5px;">Usuń puste spotkanie</button>
+        <button
+          v-if="!checkUser(meeting)" @click="addUser(meeting)" style="float: right;margin:5px;"
+        >Zapisz się</button>
+        <button v-else @click="removeUser(meeting)" style="float: right;margin:5px;">Wypisz się</button>
+        <td>{{test}}</td>
       </tr>
     </tbody>
   </table>
@@ -23,21 +27,39 @@
 
 <script>
 import MeetingParticipants from "./MeetingParticipants";
-
 export default {
   components: { MeetingParticipants },
   data() {
     return {
-      counter: 0
+      counter: 0,
+      //isAdded: false
+      test: "fgnfg",
+      added: false
     };
   },
-  props: ["meetings"],
+  props: ["meetings", "username"],
   methods: {
+    checkUser(meeting) {
+      var isAdded = false;
+      var i;
+      for (i = 0; i < meeting.participants.length; i++) {
+        if (meeting.participants[i].name == this.username) {
+          isAdded = true;
+        }
+      }
+      return isAdded;
+    },
     addUser(meeting) {
-      this.$emit("userAdded", meeting);
+      meeting.participants.push({ name: this.username });
       this.counter += 1;
+    },
+    removeUser(meeting) {
+      var i = meeting.participants.indexOf(this.username);
+      meeting.participants.splice(i);
+      this.counter -= 1;
     }
-  }
+  },
+  computed: {}
 };
 </script>
 
