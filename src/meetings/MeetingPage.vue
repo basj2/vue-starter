@@ -18,10 +18,11 @@
     </div>
     <div v-if="meetings.length > 0 ">
       <h5>Zaplanowane spotkania ({{meetings.length}})</h5>
-      <meetings-list 
-	  :meetings="meetings" @userAdded="addUser($event)"></meetings-list>
+      <meetings-list :meetings="meetings" @userAdded="addUser($event)"></meetings-list>
+	  <!--<h5  style="color:red">{{message}}</h5>-->
     </div>
-    <h5>{{test}}</h5>
+	
+    
   </div>
 </template>
 
@@ -36,25 +37,39 @@ export default {
     return {
       meetings: [],
       newMeetingForm: false,
-	  test: "",
-	 
+      test: "",
+      message: ""
     };
   },
   methods: {
     addNewMeeting(meeting) {
       this.meetings.push(meeting);
       this.newMeetingForm = false;
-      //this.meetingId = this.meetings.indexOf(meeting);
+
     },
     openMeetingForm() {
       this.newMeetingForm = true;
     },
     addUser(meeting) {
-      //this.test = "a";
-      meeting.participants.push({ name: this.username });
-	  this.test = meeting;
-	 
+      var isAdded = false;
+      var i;
+      for (i = 0; i < meeting.participants.length; i++) {
+        if (meeting.participants[i].name == this.username) {
+          isAdded = true;
+        }
+      }
+      if (!isAdded) {
+		meeting.participants.push({ name: this.username });
+		//this.message = ""
+	  } 
+	  if (isAdded) {
+		  //this.message = "Zostałeś już zapisany."
+	  }
+      
     }
+  },
+  computed:{
+	 
   }
 };
 </script>
