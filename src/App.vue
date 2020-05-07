@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <h1>Witaj w systemie do zapisów na zajęcia</h1>
+    <h1>System do zapisów na zajęcia</h1>
     <div v-show="!authenticatedUsername">
       <login-form @login="logMeIn($event)"></login-form>
     </div>
     <div v-show="authenticatedUsername">
       <logged-in-user :username="authenticatedUsername" @logout="logMeOut()"></logged-in-user>
 
-      <meeting-page  :username="authenticatedUsername"></meeting-page>
+      <meeting-page :username="authenticatedUsername"></meeting-page>
     </div>
   </div>
 </template>

@@ -11,13 +11,11 @@ export default {
       oldCounter: 0
     };
   },
-
   props: ["participants", "counter"],
-
   computed: {
     check() {
       if (this.oldCounter != this.counter) {
-       this.oldCounter = this.counter;
+        this.oldCounter = this.counter;
         return true;
       } else {
         return false;

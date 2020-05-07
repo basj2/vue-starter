@@ -8,11 +8,9 @@
     <div v-if="newMeetingForm == false">
       <button @click="openMeetingForm()">Dodaj nowe spotkanie</button>
     </div>
-
     <div v-else>
       <new-meeting-form :participant="username" @added="addNewMeeting($event)"></new-meeting-form>
     </div>
-
     <div v-if="meetings.length == 0">
       <h5>Brak zaplanowanych spotkań.</h5>
     </div>
@@ -20,7 +18,6 @@
       <h5>Zaplanowane spotkania ({{meetings.length}})</h5>
       <meetings-list :username="username" :meetings="meetings"></meetings-list>
       <!--<h5  style="color:red">{{message}}</h5>-->
-      
     </div>
   </div>
 </template>
@@ -35,9 +32,7 @@ export default {
     return {
       meetings: [],
       newMeetingForm: false,
-      id: 0,
-
-
+      id: 0
     };
   },
   methods: {
@@ -46,7 +41,6 @@ export default {
       this.meetings.push(meeting);
       this.newMeetingForm = false;
       this.id += 1;
-      
     },
     openMeetingForm() {
       this.newMeetingForm = true;
