@@ -16,13 +16,12 @@
     <div v-if="meetings.length == 0">
       <h5>Brak zaplanowanych spotkań.</h5>
     </div>
-    <div v-if="meetings.length > 0 ">
+    <div v-if="meetings.length > 0">
       <h5>Zaplanowane spotkania ({{meetings.length}})</h5>
-      <meetings-list :username="username":meetings="meetings"></meetings-list>
-	  <!--<h5  style="color:red">{{message}}</h5>-->
+      <meetings-list :username="username" :meetings="meetings"></meetings-list>
+      <!--<h5  style="color:red">{{message}}</h5>-->
+      
     </div>
-	
-    
   </div>
 </template>
 
@@ -36,22 +35,22 @@ export default {
     return {
       meetings: [],
       newMeetingForm: false,
-      test: "",
-	  isAdded: false
+      id: 0,
+
+
     };
   },
   methods: {
     addNewMeeting(meeting) {
+      meeting.id = this.id;
       this.meetings.push(meeting);
       this.newMeetingForm = false;
+      this.id += 1;
+      
     },
     openMeetingForm() {
       this.newMeetingForm = true;
-    },
-    
-  },
-  computed:{
-	 
+    }
   }
 };
 </script>

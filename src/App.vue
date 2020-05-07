@@ -7,7 +7,7 @@
     <div v-show="authenticatedUsername">
       <logged-in-user :username="authenticatedUsername" @logout="logMeOut()"></logged-in-user>
 
-      <meeting-page :loggedOut="loggedOut" :username="authenticatedUsername"></meeting-page>
+      <meeting-page  :username="authenticatedUsername"></meeting-page>
     </div>
   </div>
 </template>

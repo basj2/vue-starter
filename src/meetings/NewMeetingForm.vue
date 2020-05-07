@@ -20,7 +20,7 @@ export default {
     addNewMeeting() {
       this.newMeeting.participants = [];
       this.$emit("added", this.newMeeting);
-      //this.newMeeting.participants.push({name: 'test'});
+      
       this.newMeeting = {};
     }
   }

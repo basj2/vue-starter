@@ -17,7 +17,7 @@ export default {
   computed: {
     check() {
       if (this.oldCounter != this.counter) {
-        this.oldCounter = this.counter;
+       this.oldCounter = this.counter;
         return true;
       } else {
         return false;
