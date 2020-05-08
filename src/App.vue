@@ -6,8 +6,7 @@
     </div>
     <div v-show="authenticatedUsername">
       <logged-in-user :username="authenticatedUsername" @logout="logMeOut()"></logged-in-user>
-
-      <meeting-page :username="authenticatedUsername"></meeting-page>
+      <meeting-page  :username="authenticatedUsername"></meeting-page>
     </div>
   </div>
 </template>
@@ -17,15 +16,12 @@ import "milligram";
 import LoginForm from "./LoginForm";
 import LoggedInUser from "./LoggedInUser";
 import MeetingPage from "./meetings/MeetingPage";
-
 export default {
   components: { LoginForm, LoggedInUser, MeetingPage },
-
   data() {
     return {
       authenticatedUsername: "",
-      loggedOut: false
-    };
+      };
   },
   methods: {
     logMeIn(username) {
@@ -33,7 +29,6 @@ export default {
     },
     logMeOut() {
       this.authenticatedUsername = "";
-      this.loggedOut = true;
     }
   }
 };

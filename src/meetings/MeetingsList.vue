@@ -11,8 +11,11 @@
       <tr v-for="meeting in meetings" :key="meeting.name">
         <td>{{ meeting.name }}</td>
         <td>{{ meeting.description }}</td>
-        <td>
-          <meeting-participants :counter="counter" :participants="meeting.participants"></meeting-participants>
+        <td v-if="userChange">
+          <li
+            v-for="participant in meeting.participants"
+            :key="participant.name"
+          >{{ participant.name }}</li>
         </td>
         <button
           v-if="meeting.participants.length == 0"
@@ -35,18 +38,17 @@
 </template>
 
 <script>
-import MeetingParticipants from "./MeetingParticipants";
 export default {
-  components: { MeetingParticipants },
   data() {
     return {
-      counter: 0,
-      id: 0
+      userChange: 0,
+      id: 0,
     };
   },
   props: ["meetings", "username"],
   methods: {
     checkUser(meeting) {
+      this.new = false;
       var isAdded = false;
       var i;
       for (i = 0; i < meeting.participants.length; i++) {
@@ -58,7 +60,8 @@ export default {
     },
     addUser(meeting) {
       meeting.participants.push({ name: this.username });
-      this.counter += 1;
+      this.new = true;
+      this.userChange += 1;
     },
     removeUser(meeting) {
       var i;
@@ -68,18 +71,14 @@ export default {
           i = j;
         }
       }
-
       meeting.participants.splice(i, 1);
-      this.counter -= 1;
-      this.test = i;
+      this.userChange -= 1;
     },
-
     removeEmptyMeeting(meeting) {
       var i = this.meetings.indexOf(meeting);
       this.meetings.splice(i, 1);
     }
   },
-  computed: {}
 };
 </script>
 
