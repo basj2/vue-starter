@@ -42,7 +42,6 @@ export default {
   data() {
     return {
       userChange: 0,
-      id: 0,
     };
   },
   props: ["meetings", "username"],
